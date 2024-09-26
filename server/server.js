@@ -5,6 +5,8 @@ import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+console.log('filename:', __filename);
+console.log('dir name:', __dirname)
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -22,9 +24,9 @@ app.get('/api/message', (req, res) => {
 });
 
 // For any other routes, serve the React front-end
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../client/build/endex.html'));
-});
+// app.get('*', (req, res) => {
+//     res.sendFile(path.join(__dirname, '../client/build/index.html'));
+// });
 
 // Start server
 app.listen(PORT, () => {
