@@ -1,6 +1,11 @@
-const express = require('express');
-const cors = require('cors');
-const path = require('path');
+import express from 'express';
+import cors from 'cors';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 const app = express();
 const PORT = process.env.PORT || 5000;
 
@@ -8,19 +13,20 @@ const PORT = process.env.PORT || 5000;
 app.use(cors());
 
 // Serve static files from the React app
-app.use(express.static(path.join(__dirname, '../client/build')));
+const publicPath = path.join(__dirname, '../client/build');
+app.use(express.static(publicPath));
 
 // Simple API route
 app.get('/api/message', (req, res) => {
-  res.json({ message: "Hello from the back-end!" });
+    res.json({ message: "Hello from the back-end!" });
 });
 
 // For any other routes, serve the React front-end
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../client/build/index.html'));
-  });
+    res.sendFile(path.join(__dirname, '../client/build'));
+});
 
 // Start server
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+    console.log(`Server running on port ${PORT}`);
 });
