@@ -17,8 +17,8 @@ app.use(cors({
 }));
 
 // Serve static files from the React app
-// const publicPath = path.join(__dirname, '../client/build');
-// app.use(express.static(publicPath));
+const publicPath = path.join(__dirname, '../client/build');
+app.use(express.static(publicPath));
 
 // Simple API route
 app.get('/api/message', (req, res) => {
@@ -26,9 +26,9 @@ app.get('/api/message', (req, res) => {
 });
 
 // For any other routes, serve the React front-end
-// app.get('*', (req, res) => {
-//     res.sendFile(path.join(__dirname, '../client/build/index.html'));
-// });
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../client/build/index.html'));
+});
 
 // Start server
 app.listen(PORT, () => {
