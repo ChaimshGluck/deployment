@@ -23,7 +23,7 @@ app.get('/api/message', (req, res) => {
 
 // For any other routes, serve the React front-end
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../client/build'));
+    res.sendFile(path.join(__dirname, '../client/build/endex.html'));
 });
 
 // Start server
