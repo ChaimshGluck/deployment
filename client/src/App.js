@@ -6,7 +6,7 @@ function App() {
 
   useEffect(() => {
     // Fetch the message from the back-end
-    fetch('http://localhost:5000/api/message')
+    fetch('https://shark-app-lstbh.ondigitalocean.app/api/message')
       .then(response => response.json())
       .then(data => setMessage(data.message))
       .catch(error => console.error('Error fetching message:', error));
