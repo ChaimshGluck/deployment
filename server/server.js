@@ -19,7 +19,6 @@ app.use(cors())
 
 
 // Serve static files from the React app
-const publicPath = path.join(__dirname, '../client/build');
 
 
 app.use((req, res, next) => {
@@ -33,6 +32,7 @@ app.get('/api/message', (req, res) => {
     res.json({ message: "Hello from the back-end!" });
 });
 
+const publicPath = path.join(__dirname, '../client/build');
 app.use(express.static(publicPath));
 
 app.get('*', (req, res) => {
