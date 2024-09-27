@@ -7,7 +7,7 @@ function App() {
 
   useEffect(() => {
     // Fetch the message from the back-end
-    fetch('/api/message')
+    fetch('https://squid-app-68y8f.ondigitalocean.app/api/message')
       .then(response => {
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
