@@ -6,11 +6,20 @@ function App() {
 
   useEffect(() => {
     // Fetch the message from the back-end
-    fetch('https://squid-app-68y8f.ondigitalocean.app/api/message')
-      .then(response => response.json())
+    fetch('/api/message')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+      })
       .then(data => setMessage(data.message))
-      .catch(error => console.error('Error fetching message:', error));
+      .catch(error => {
+        console.error('Error fetching message:', error);
+        setError(error.message);
+      });
   }, []);
+
 
   return (
     <div className="App">
