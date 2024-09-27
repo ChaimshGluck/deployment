@@ -5,24 +5,16 @@ function App() {
   const [message, setMessage] = useState('');
 
   useEffect(() => {
-    fetch('/api/message')
-      .then(response => {
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        return response.json();
-      })
+    // Fetch the message from the back-end
+    fetch('https://squid-app-68y8f.ondigitalocean.app/api/message')
+      .then(response => response.json())
       .then(data => setMessage(data.message))
-      .catch(error => {
-        console.error('Error fetching message:', error);
-        setError(error.message);
-      });
+      .catch(error => console.error('Error fetching message:', error));
   }, []);
 
   return (
     <div className="App">
       <header className="App-header">
-        {error ? <p>Error: {error}</p> : null}
         <h1>{message ? message : "Loading..."}</h1>
       </header>
     </div>
