@@ -16,24 +16,28 @@ const PORT = 8080;
 app.use(cors())
 
 // For any other routes, serve the React front-end
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../client/build/index.html'));
-});
+
 
 // Serve static files from the React app
 const publicPath = path.join(__dirname, '../client/build');
-app.use(express.static(publicPath));
+
 
 app.use((req, res, next) => {
     console.log(`Received request: ${req.method} ${req.url}`);
     next();
-  });
-  
-  // Simple API route
-  app.get('/api/message', (req, res) => {
+});
+
+// Simple API route
+app.get('/api/message', (req, res) => {
     console.log('Sending message from /api/message');
     res.json({ message: "Hello from the back-end!" });
-  });
+});
+
+app.use(express.static(publicPath));
+
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../client/build/index.html'));
+});
 
 // Start server
 app.listen(PORT, () => {
