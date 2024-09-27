@@ -10,9 +10,10 @@ const app = express();
 const PORT = 8080;
 
 // Middleware
-app.use(cors({
-    origin: 'https://shark-app-lstbh.ondigitalocean.app'
-}));
+// app.use(cors({
+//     origin: 'https://shark-app-lstbh.ondigitalocean.app'
+// }));
+app.use(cors())
 
 // For any other routes, serve the React front-end
 app.get('*', (req, res) => {
@@ -23,10 +24,16 @@ app.get('*', (req, res) => {
 const publicPath = path.join(__dirname, '../client/build');
 app.use(express.static(publicPath));
 
-// Simple API route
-app.get('/api/message', (req, res) => {
+app.use((req, res, next) => {
+    console.log(`Received request: ${req.method} ${req.url}`);
+    next();
+  });
+  
+  // Simple API route
+  app.get('/api/message', (req, res) => {
+    console.log('Sending message from /api/message');
     res.json({ message: "Hello from the back-end!" });
-});
+  });
 
 // Start server
 app.listen(PORT, () => {
