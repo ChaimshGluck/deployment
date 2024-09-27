@@ -5,16 +5,24 @@ function App() {
   const [message, setMessage] = useState('');
 
   useEffect(() => {
-    // Fetch the message from the back-end
     fetch('/api/message')
-      .then(response => response.json())
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+      })
       .then(data => setMessage(data.message))
-      .catch(error => console.error('Error fetching message:', error));
+      .catch(error => {
+        console.error('Error fetching message:', error);
+        setError(error.message);
+      });
   }, []);
 
   return (
     <div className="App">
       <header className="App-header">
+        {error ? <p>Error: {error}</p> : null}
         <h1>{message ? message : "Loading..."}</h1>
       </header>
     </div>
