@@ -6,7 +6,7 @@ function App() {
 
   useEffect(() => {
     // Fetch the message from the back-end
-    fetch('https://squid-app-68y8f.ondigitalocean.app/api/message')
+    fetch('/api/message')
       .then(response => response.json())
       .then(data => setMessage(data.message))
       .catch(error => console.error('Error fetching message:', error));
