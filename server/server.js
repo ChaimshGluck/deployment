@@ -16,6 +16,12 @@ const PORT = 8080;
 // }));
 app.use(cors())
 
+// Simple API route
+app.get('/api/message', (req, res) => {
+    console.log('Sending message from /api/message');
+    res.json({ message: "Hello from the back-end!" });
+});
+
 // For any other routes, serve the React front-end
 
 
@@ -36,11 +42,6 @@ app.use((req, res, next) => {
     next();
 });
 
-// Simple API route
-app.get('/api/message', (req, res) => {
-    console.log('Sending message from /api/message');
-    res.json({ message: "Hello from the back-end!" });
-});
 
 const publicPath = path.join(__dirname, '../client/build');
 app.use(express.static(publicPath));
