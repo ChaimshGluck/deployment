@@ -28,10 +28,8 @@ app.get('/api/message', (req, res) => {
 // Serve static files from the React app
 
 // Create a proxy middleware for API requests
-const proxy = createProxyMiddleware('/api', {
-    target: 'https://squid-app-68y8f.ondigitalocean.app', // Replace with your API server domain
-    changeOrigin: true,
-  });
+const proxy = createProxyMiddleware('/api', { target: 'https://squid-app-68y8f.ondigitalocean.app' });
+
   
   // Use the proxy middleware in your Express app
 app.use('/api', proxy);
