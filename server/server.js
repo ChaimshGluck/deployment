@@ -20,6 +20,15 @@ app.use(cors())
 
 // Serve static files from the React app
 
+// Create a proxy middleware for API requests
+const proxy = createProxyMiddleware('/api', {
+    target: 'https://squid-app-68y8f.ondigitalocean.app', // Replace with your API server domain
+    changeOrigin: true,
+  });
+  
+  // Use the proxy middleware in your Express app
+app.use('/api', proxy);
+
 
 app.use((req, res, next) => {
     console.log(`Received request: ${req.method} ${req.url}`);
